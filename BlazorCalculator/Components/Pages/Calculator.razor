@@ -1,0 +1,38 @@
+﻿@page "/calculator"
+@rendermode InteractiveServer
+@inject BlazorCalculator.Services.CalculatorService CalcService
+
+<div class="calculator-container">
+    <div class="calculator-header">
+        <span class="calculator-icon">🧮</span>
+        <h3>Kalkulator</h3>
+    </div>
+
+    @if (!string.IsNullOrEmpty(CalcService.LastError))
+    {
+        <div class="calculator-error">
+            @CalcService.LastError
+        </div>
+    }
+
+    <CalculatorDisplay Value="@CalcService.CurrentValue" />
+
+    <CalculatorKeypad
+        OnNumberClick="NumberClick"
+        OnOperatorClick="OperatorClick"
+        OnExecute="Execute"
+        OnClear="Clear"
+        OnAllClear="AllClear"
+        OnToggleSign="ToggleSign"
+        OnDecimal="DecimalInput" />
+</div>
+
+@code {
+    private void NumberClick(string digit) => CalcService.InputNumber(digit);
+    private void OperatorClick(string op) => CalcService.SetOperator(op);
+    private void Execute() => CalcService.Execute();
+    private void Clear() => CalcService.Clear();
+    private void AllClear() => CalcService.AllClear();
+    private void ToggleSign() => CalcService.ToggleSign();
+    private void DecimalInput() => CalcService.InputDecimal();
+}

@@ -1,0 +1,40 @@
+﻿@code {
+    [Parameter] public EventCallback<string> OnNumberClick { get; set; }
+    [Parameter] public EventCallback<string> OnOperatorClick { get; set; }
+    [Parameter] public EventCallback OnExecute { get; set; }
+    [Parameter] public EventCallback OnClear { get; set; }
+    [Parameter] public EventCallback OnAllClear { get; set; }
+    [Parameter] public EventCallback OnToggleSign { get; set; }
+    [Parameter] public EventCallback OnDecimal { get; set; }
+}
+
+<div class="calculator-keys">
+    <!-- row 1 -->
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("7"))">7</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("8"))">8</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("9"))">9</button>
+    <button class="operator" @onclick="@(() => OnOperatorClick.InvokeAsync("/"))">/</button>
+
+    <!-- row 2 -->
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("4"))">4</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("5"))">5</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("6"))">6</button>
+    <button class="operator" @onclick="@(() => OnOperatorClick.InvokeAsync("*"))">x</button>
+
+    <!-- row 3 -->
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("1"))">1</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("2"))">2</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("3"))">3</button>
+    <button class="operator" @onclick="@(() => OnOperatorClick.InvokeAsync("-"))">-</button>
+
+    <!-- row 4 -->
+    <button class="modifier" @onclick="@OnToggleSign">±</button>
+    <button @onclick="@(() => OnNumberClick.InvokeAsync("0"))">0</button>
+    <button @onclick="@OnDecimal">,</button>
+    <button class="operator" @onclick="@(() => OnOperatorClick.InvokeAsync("+"))">+</button>
+
+    <!-- row 5 (actions) -->
+    <button class="primary" @onclick="@OnAllClear">AC</button>
+    <button @onclick="@OnClear">C</button>
+    <button class="primary" @onclick="@OnExecute">=</button>
+</div>
