@@ -1,0 +1,20 @@
+﻿# Build and user folders
+bin/
+obj/
+.idea/
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Published output
+wwwroot/dist/
+node_modules/
+*.publish.xml
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
